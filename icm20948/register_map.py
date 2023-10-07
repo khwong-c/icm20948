@@ -128,3 +128,11 @@ class Registers(Enum):
     I2C_SLV4_REG        = (3, 0x14)
     I2C_SLV4_CTRL       = (3, 0x15)
     I2C_SLV4_DO         = (3, 0x16)
+
+    @property
+    def bank(self):
+        return self.value[0]
+
+    @property
+    def addr(self):
+        return self.value[1]
