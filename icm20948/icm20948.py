@@ -35,3 +35,20 @@ class ICM20948Transport(I2CDevice):
     def get_register(self, register: Registers):
         with self.bank(register.bank):
             return self.read(register.addr)
+
+    def set_bits(self, register: Registers, bits):
+        with self.bank(register.bank):
+            value = bits | self.read(register.addr)
+            self.write(register.addr, value)
+
+    def clear_bits(self, register: Registers, bits):
+        with self.bank(register.bank):
+            value = (bits ^ 0xFF) & self.read(register.addr)
+            self.write(register.addr, value)
+
+
+class ICM20948(ICM20948Transport):
+    """
+    Application Driving layer implementation for ICM20948
+    """
+    ...
